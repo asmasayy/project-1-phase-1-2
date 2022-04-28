@@ -17,7 +17,7 @@ router.put("/blogs/:blogId",allControllers.updateBlogs);
 
 router.delete("/blogs/:blogId",allControllers.validateBlog);
 
-router.delete("/Blogs",allControllers.deleteBlog);
+router.delete("/Blogs",allControllers.deleteBlogsByQuery);
 
 
 

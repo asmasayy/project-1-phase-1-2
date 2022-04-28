@@ -100,3 +100,16 @@ Blogs
 }
 Refer https://jsonplaceholder.typicode.com/guide/ for some fake blogs data.
 Note: Create a group database and use the same database in connection string by replacing `groupXDatabase
+
+
+deleteBlogsByQuery
+// add a query variable and add a default key value [ isDeleted: false ]
+            //-> if tags defined
+  //-> if subcategory defined
+   // create a query structure in [ query.$or = ... }
+
+   
+        // console.log(query)
+        // check if the query related data exist OR not
+
+        // perform delete here using update many 
