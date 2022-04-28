@@ -50,9 +50,13 @@ Delete blog documents by category, authorid, tag name, subcategory name, unpubli
 If the blog document doesn't exist then return an HTTP status of 404 with a body like this
 Phase II
 Add authentication and authroisation feature
+
 POST /login
+
 Allow an author to login with their email and password. On a successful login attempt return a JWT token contatining the authorId
 If the credentials are incorrect return a suitable error message with a valid HTTP status code
+
+
 Authentication
 Add an authorisation implementation for the JWT token that validates the token before every protected endpoint is called. If the validation fails, return a suitable error message with a corresponding HTTP status code
 Protected routes are create a blog, edit a blog, get the list of blogs, delete a blog(s)
@@ -113,3 +117,46 @@ deleteBlogsByQuery
         // check if the query related data exist OR not
 
         // perform delete here using update many 
+
+        [5:22 PM, 4/28/2022] Bolendra Moran: const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
+const authorModel = require("../models/authorModel");
+
+const authToken = function(req, res, next) {
+
+    let id = req.params.userId;
+    if (!mongoose.isValidObjectId(id)) {
+        return res.status(400).send({
+            msg: "Invalid userId",
+        });
+    }
+
+    let token = req.headers["x-Auth-token"] || req.headers["x-auth-token"];
+    if (!token) {
+        return res.send({
+            msg: "Token is required",
+        });
+    }
+
+    let tokenverify = jwt.verify(token, "functionup-uranium");
+
+    if (tokenverify.userId !== id) {
+        return res.status(401).send({
+            msg: "You aren't allowed",
+        });
+    }
+
+    next();
+
+}
+const authorExist = async function(req, res, next) {
+
+    let authorId = req.params.userId;
+    let authorDetails = await authorModel.findById(authorId);
+    if (!authorDetails)
+        return res.send({ status: false, msg: "No such user exists" });
+    else {
+        next()
+    }
+}
+module.exp
