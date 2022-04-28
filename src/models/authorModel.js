@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const validator= require("validator");
+const validator = require("validator");
 
 const authorSchema = new mongoose.Schema({
     firstName: {
@@ -18,9 +18,9 @@ const authorSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        validate(value){
-            if(!validator.isEmail(value)){
-                throw new Error ("Invalid Email.");
+        validate(value) {
+            if (!validator.isEmail(value)) {
+                throw new Error("Invalid Email.");
             }
         }
     },
@@ -30,8 +30,7 @@ const authorSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-module.exports = mongoose.model('author', authorSchema);
-
+module.exports = mongoose.model('Author', authorSchema);//authors
 
 
 

@@ -13,15 +13,14 @@ router.post("/createBlog",allControllers.createBlogs);
 
 router.get("/blogs",allControllers.getBlogs);
 
-router.put("/updateBlogs",allControllers.updateBlogs);
+router.put("/blogs/:blogId",allControllers.updateBlogs);
 
-router.delete("/blog",allControllers.validateBlog);
+router.delete("/blogs/:blogId",allControllers.validateBlog);
 
 router.delete("/Blogs",allControllers.deleteBlog);
 
 
 
 
-
-
 module.exports = router;
+
